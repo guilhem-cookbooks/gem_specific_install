@@ -2,7 +2,29 @@
 
 # Requirements
 
+## Cookbooks
+
+* git
+* run_action_now
+
 # Usage
+
+```
+include_recipe "gem_specific_install"
+chef_gem "inifile" do
+  provider Chef::Provider::Package::Rubygems::SpecificInstall
+  source "https://github.com/optiflows/inifile.git"
+end
+```
+
+```
+include_recipe "gem_specific_install"
+gem_package "inifile" do
+  provider Chef::Provider::Package::Rubygems::SpecificInstall
+  source "https://github.com/optiflows/inifile.git"
+  options { :branch => "master}
+end
+```
 
 # Attributes
 
