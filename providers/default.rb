@@ -23,6 +23,7 @@ action :install do
       gem = Gem::Builder.new(gemspec).build
       inst = Gem::DependencyInstaller.new
       inst.install gem
+      Gem.clearpaths
     end
     action :nothing
     only_if { ::File.exists?(gemspec_file) }
