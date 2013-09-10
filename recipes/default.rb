@@ -17,10 +17,12 @@
 # limitations under the License.
 #
 
-include_recipe "git"
+#include_recipe "git"
+package "git" do
+end.run_action_now
 
 chef_gem "specific_install" do
-end.run_action_now
+end
 
 gem_package "specific_install" do
-end.run_action_now
+end
