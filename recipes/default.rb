@@ -22,6 +22,8 @@
 package 'git' do
 end.run_action(:install)
 
-chef_gem "specific_install"
+chef_gem "specific_install" do
+  version '0.2.7'
+end
 
 gem_package "specific_install"
