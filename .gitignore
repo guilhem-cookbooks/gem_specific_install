@@ -13,3 +13,7 @@ Gemfile.lock
 bin/*
 .bundle/*
 
+.cache
+.kitchen
+.kitchen.local.yml
+.coverage
