@@ -30,8 +30,8 @@ action :install do
       inst.install gem
       Gem.clear_paths
     end
-    # ruby-block may fail and isn't re-notifies by git in re-run
-    action :nothing if already_installed?
+    # install only on git update
+    action :nothing
     only_if { ::File.exist?(gemspec_file) }
   end
 end
