@@ -1,2 +1,2 @@
-name             'gem_specific_install_test'
-version          '0.1.0'
+name 'gem_specific_install_test'
+version '0.1.0'

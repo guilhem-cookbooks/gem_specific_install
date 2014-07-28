@@ -28,7 +28,7 @@ action :install do
     end
     # ruby-block may fail and isn't re-notifies by git in re-run
     action :nothing if already_installed?
-    only_if { ::File.exists?(gemspec_file) }
+    only_if { ::File.exist?(gemspec_file) }
   end
 end
 
