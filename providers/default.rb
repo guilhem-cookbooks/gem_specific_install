@@ -17,11 +17,15 @@ action :install do
     block do
       require 'rubygems/dependency_installer'
       require 'rubygems/specification'
-      require 'rubygems/builder'
 
       ::Dir.chdir(path)
       gemspec = ::Gem::Specification.load(gemspec_file)
-      gem = ::Gem::Builder.new(gemspec).build
+      gem = if RUBY_VERSION < '2.0.0'
+              require 'rubygems/builder'
+              Gem::Builder.new(gemspec).build
+            else
+              Gem::Package.build(gemspec)
+            end
       inst = ::Gem::DependencyInstaller.new
       inst.install gem
       Gem.clear_paths
