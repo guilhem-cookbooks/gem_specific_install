@@ -20,7 +20,7 @@ action :install do
 
       ::Dir.chdir(path)
       gemspec = ::Gem::Specification.load(gemspec_file)
-      gem = if RUBY_VERSION < '2.0.0'
+      gem = if Gem::VERSION < '2.0.0'
               require 'rubygems/builder'
               Gem::Builder.new(gemspec).build
             else
