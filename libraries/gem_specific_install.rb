@@ -6,9 +6,7 @@ class Chef
       class Rubygems
         class SpecificInstall < Chef::Provider::Package::Rubygems
           def action_install
-            options = @new_resource.options
-            cmd = "#{gem_binary_path} specific_install #{@new_resource.package_name} -l #{options[:repo]}"
-            cmd << " -b #{options[:branch]}" if options[:branch]
+            cmd = "#{gem_binary_path} specific_install #{@new_resource.package_name} #{@new_resource.options}"
             logger.debug { "use #{cmd} to install" }
             shell_out!(cmd, :env => nil)
           end
