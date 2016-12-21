@@ -18,22 +18,29 @@ action :install do
       require 'rubygems/dependency_installer'
       require 'rubygems/specification'
 
-      ::Dir.chdir(path)
-      gemspec = ::Gem::Specification.load(gemspec_file)
-      gem = if RUBY_VERSION < '2.0.0'
-              require 'rubygems/builder'
-              Gem::Builder.new(gemspec).build
-            else
-              Gem::Package.build(gemspec)
-            end
-      inst = ::Gem::DependencyInstaller.new
-      inst.install gem
-      Gem.clear_paths
+      install_gem
     end
     # install only on git update
     action :nothing
     only_if { ::File.exist?(gemspec_file) }
   end
+end
+
+def install_gem
+  ::Dir.chdir(path)
+
+  gemspec = ::Gem::Specification.load(gemspec_file)
+  gem = if RUBY_VERSION < '2.0.0'
+          require 'rubygems/builder'
+          Gem::Builder.new(gemspec).build
+        else
+          Gem::Package.build(gemspec)
+        end
+
+  installer = ::Gem::DependencyInstaller.new
+  installer.install gem
+
+  Gem.clear_paths
 end
 
 def path
